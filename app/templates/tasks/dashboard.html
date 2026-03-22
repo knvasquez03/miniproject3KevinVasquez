@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Your Tasks</h2>
+
+{% for task in tasks %}
+<div class="card mt-3 p-3">
+    <h4>{{ task['title'] }}</h4>
+    <p>{{ task['description'] }}</p>
+    <p><strong>Category:</strong> {{ task['category_name'] }}</p>
+    <p><strong>Status:</strong> {{ task['status'] }}</p>
+
+    {% if task['status'] != 'Completed' %}
+    <form method="post" action="/tasks/complete/{{ task['id'] }}">
+        <button class="btn btn-success btn-sm">Complete</button>
+    </form>
+    {% endif %}
+
+    <!-- Delete button -->
+    <button class="btn btn-danger btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#modal{{ task['id'] }}">
+        Delete
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal{{ task['id'] }}">
+        <div class="modal-dialog">
+            <div class="modal-content p-3">
+                <p>Delete this task?</p>
+
+                <form method="post" action="/tasks/delete/{{ task['id'] }}">
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+
+                <button class="btn btn-secondary mt-2" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% else %}
+<p>No tasks yet.</p>
+{% endfor %}
+{% endblock %}

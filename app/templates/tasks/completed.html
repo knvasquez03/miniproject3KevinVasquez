@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Completed Tasks</h2>
+
+<ul>
+    {% for task in tasks %}
+        <li>{{ task['title'] }} - {{ task['category_name'] }}</li>
+    {% else %}
+        <li>No completed tasks</li>
+    {% endfor %}
+</ul>
+{% endblock %}

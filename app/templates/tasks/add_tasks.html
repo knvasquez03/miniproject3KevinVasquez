@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Add Task</h2>
+
+<form method="post">
+
+    <label>Title</label>
+    <input name="title" class="form-control">
+
+    <label class="mt-2">Description</label>
+    <textarea name="description" class="form-control"></textarea>
+
+    <label class="mt-2">Due Date</label>
+    <input type="date" name="due_date" class="form-control">
+
+    <label class="mt-2">Category</label>
+    <select name="category_id" class="form-control">
+        {% for category in categories %}
+            <option value="{{ category['id'] }}">{{ category['name'] }}</option>
+        {% endfor %}
+    </select>
+
+    <button class="btn btn-primary mt-3">Add Task</button>
+</form>
+{% endblock %}

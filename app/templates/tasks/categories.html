@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Categories</h2>
+
+<form method="post">
+    <input name="name" class="form-control" placeholder="New category">
+    <button class="btn btn-primary mt-2">Add</button>
+</form>
+
+<ul class="mt-3">
+    {% for category in categories %}
+        <li>{{ category['name'] }}</li>
+    {% else %}
+        <li>No categories yet</li>
+    {% endfor %}
+</ul>
+{% endblock %}
