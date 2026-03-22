@@ -1,5 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+*.pyc
 *.py[codz]
 *$py.class
 
@@ -64,6 +65,8 @@ db.sqlite3-journal
 # Flask stuff:
 instance/
 .webassets-cache
+
+instance/*.sqlite
 
 # Scrapy stuff:
 .scrapy
