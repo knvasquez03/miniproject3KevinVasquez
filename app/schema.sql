@@ -4,7 +4,6 @@
 
 # Mini Project 3
 
-
 DROP TABLE IF EXISTS task;
 DROP TABLE IF EXISTS category;
 DROP TABLE IF EXISTS user;
