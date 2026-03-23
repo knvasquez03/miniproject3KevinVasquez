@@ -3,8 +3,8 @@
 {% block content %}
 <h2>Add Task</h2>
 
+{% if categories %}
 <form method="post">
-
     <label>Title</label>
     <input name="title" class="form-control">
 
@@ -23,4 +23,8 @@
 
     <button class="btn btn-primary mt-3">Add Task</button>
 </form>
+{% else %}
+<p>You need to add a category first.</p>
+<a href="/tasks/categories" class="btn btn-warning">Go to Categories</a>
+{% endif %}
 {% endblock %}

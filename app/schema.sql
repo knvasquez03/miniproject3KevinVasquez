@@ -1,9 +1,3 @@
-# INF601 - Advanced Programming in Python
-
-# Kevin Vasquez
-
-# Mini Project 3
-
 DROP TABLE IF EXISTS task;
 DROP TABLE IF EXISTS category;
 DROP TABLE IF EXISTS user;

@@ -5,6 +5,7 @@
 # Mini Project 3
 
 from flask import Blueprint, flash, g, redirect, render_template, request, url_for
+
 from .auth import login_required
 from .db import get_db
 
@@ -24,12 +25,14 @@ def dashboard():
         """,
         (g.user["id"],)
     ).fetchall()
+
     return render_template("tasks/dashboard.html", tasks=tasks)
 
 @bp.route("/add", methods=("GET", "POST"))
 @login_required
 def add_task():
     db = get_db()
+
     categories = db.execute(
         "SELECT * FROM category WHERE user_id = ? ORDER BY name",
         (g.user["id"],)
@@ -70,6 +73,7 @@ def categories():
 
     if request.method == "POST":
         name = request.form["name"].strip()
+
         if name:
             db.execute(
                 "INSERT INTO category (name, user_id) VALUES (?, ?)",
@@ -78,6 +82,7 @@ def categories():
             db.commit()
             flash("Category added successfully.")
             return redirect(url_for("tasks.categories"))
+
         flash("Category name is required.")
 
     categories = db.execute(
@@ -91,6 +96,7 @@ def categories():
 @login_required
 def completed():
     db = get_db()
+
     tasks = db.execute(
         """
         SELECT task.*, category.name AS category_name
@@ -101,17 +107,20 @@ def completed():
         """,
         (g.user["id"],)
     ).fetchall()
+
     return render_template("tasks/completed.html", tasks=tasks)
 
 @bp.route("/complete/<int:id>", methods=("POST",))
 @login_required
 def complete_task(id):
     db = get_db()
+
     db.execute(
         "UPDATE task SET status = 'Completed' WHERE id = ? AND user_id = ?",
         (id, g.user["id"])
     )
     db.commit()
+
     flash("Task marked as completed.")
     return redirect(url_for("tasks.dashboard"))
 
@@ -119,11 +128,13 @@ def complete_task(id):
 @login_required
 def delete_task(id):
     db = get_db()
+
     db.execute(
         "DELETE FROM task WHERE id = ? AND user_id = ?",
         (id, g.user["id"])
     )
     db.commit()
+
     flash("Task deleted.")
     return redirect(url_for("tasks.dashboard"))
 
