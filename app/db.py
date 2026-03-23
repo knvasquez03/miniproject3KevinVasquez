@@ -17,7 +17,7 @@ def get_db():
         g.db.execute("PRAGMA foreign_keys = ON")
     return g.db
 
-def close_db():
+def close_db(e=None):
     db = g.pop("db", None)
 
     if db is not None:
